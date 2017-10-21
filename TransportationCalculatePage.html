@@ -94,12 +94,13 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             console.log(user.email);
+            reference.push("emission")
             //userRef = database.ref(user.uid)
           }
         })
 
         submit.onclick = function() {
-          reference.push(emission.value)
+
         }
 
       }
