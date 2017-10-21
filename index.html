@@ -14,13 +14,13 @@
           </div>
 
           <div class="container">
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <label><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="uname" id="lEmail" required>
 
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-              
-            <button type="submit">Login</button>
+            <input type="password" placeholder="Enter Password" name="psw" id="lPassword" required>
+
+            <button type="submit" id="lButton">Login</button>
             <input type="checkbox" checked="checked"> Remember me
           </div>
 
@@ -74,6 +74,22 @@
         <script>
           var logged = document.querySelector('h1')
           var signOut = document.getElementById('signOut')
+
+          var lEmail = document.getElementById('lEmail')
+          var lPassword = document.getElementById('lPassword')
+          var lButton = document.getElementById('lButton')
+
+          var l = document.querySelector('h1')
+
+          lButton.onclick = function() {
+            firebase.auth().signInWithEmailAndPassword(lEmail.value, lPassword.value).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // ...
+            });
+          }
+
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
               logged.innerHTML = "Logged in as " + user.email
