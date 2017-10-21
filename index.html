@@ -113,14 +113,14 @@
         </script>
 
         <script>
-          var logged = document.querySelector('#person-title')
-          var signOut = document.getElementById('signOut')
+          var logged = document.querySelector('#person-title');
+          var signOut = document.getElementById('signOut');
 
-          var lEmail = document.getElementById('lEmail')
-          var lPassword = document.getElementById('lPassword')
-          var lButton = document.getElementById('lButton')
+          var lEmail = document.getElementById('lEmail');
+          var lPassword = document.getElementById('lPassword');
+          var lButton = document.getElementById('lButton');
 
-          var l = document.querySelector('h1')
+          var l = document.querySelector('h1');
 
           lButton.onclick = function() {
             firebase.auth().signInWithEmailAndPassword(lEmail.value, lPassword.value).catch(function(error) {
@@ -150,32 +150,32 @@
 
           signOut.onclick = function() {
             firebase.auth().signOut().then(function() {
-              logged.innerHTML = "Sign out Successful"
-              window.location.replace('index.html')
+              logged.innerHTML = "Sign out Successful";
+              window.location.replace('index.html');
             }).catch(function(error) {
-              logged.innerHTML = "Sign out Unsuccessful"
+              logged.innerHTML = "Sign out Unsuccessful";
             })
           }
-          var rEmail = document.getElementById('rEmail')
-          var rPassword = document.getElementById('rPassword')
-          var rButton = document.getElementById('rButton')
+          var rEmail = document.getElementById('rEmail');
+          var rPassword = document.getElementById('rPassword');
+          var rButton = document.getElementById('rButton');
 
 
           rButton.onclick = function() {
             firebase.auth().createUserWithEmailAndPassword(rEmail.value, rPassword.value).catch(function(error) {
-              var errorCode = error.code
-              var errorMessage = error.message
-              alert(errorMessage)
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              alert(errorMessage);
             })
           }
 
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-              logged.innerHTML = "Logged in as " + user.email
-              window.location.replace('index.html')
+              logged.innerHTML = "Logged in as " + user.email;
+              window.location.replace('index.html');
 
             }
-          })
+          });
         </script>
     </body>
 </html>
