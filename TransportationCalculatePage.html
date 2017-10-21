@@ -107,7 +107,7 @@
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          r.innerHTML = "Logged in as " + user.email
+          logged.innerHTML = "Logged in as " + user.email
           window.location.replace('index.html')
 
         }
