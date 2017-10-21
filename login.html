@@ -10,41 +10,5 @@
         <input id="lPassword" type="password" placeholder="password">
         <br>
         <button id="lButton" type="submit">Login</button>
-
-        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-        <script>
-          // Initialize Firebase
-          var config = {
-            apiKey: "AIzaSyCPE-4VYjPkJjWnOF7yrXq6lD4Zdaw9XA0",
-            authDomain: "carbon-footprint-1c2cb.firebaseapp.com",
-            databaseURL: "https://carbon-footprint-1c2cb.firebaseio.com",
-            projectId: "carbon-footprint-1c2cb",
-            storageBucket: "",
-            messagingSenderId: "770037889701"
-          };
-          firebase.initializeApp(config);
-
-          var lEmail = document.getElementById('lEmail')
-          var lPassword = document.getElementById('lPassword')
-          var lButton = document.getElementById('lButton')
-
-          var l = document.querySelector('h1')
-
-          lButton.onclick = function() {
-            firebase.auth().signInWithEmailAndPassword(lEmail.value, lPassword.value).catch(function(error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              // ...
-            });
-          }
-
-          firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              l.innerHTML = "Logged in as " + user.email
-              window.location.replace('index.html')
-            }
-          })
-        </script>
     </body>
 </html>
