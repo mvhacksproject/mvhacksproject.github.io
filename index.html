@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Carbon Footprint</title>
+    </head>
+    <body>
+        <h1>Hello</h1>
+        <button><a style="text-decoration: none" href="login.html">Login</a></button>
+        <p>Don't Have An Account? <a href="register.html">Register</a></p>
+        <button id="signOut">Sign Out</button>
+
+        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCPE-4VYjPkJjWnOF7yrXq6lD4Zdaw9XA0",
+            authDomain: "carbon-footprint-1c2cb.firebaseapp.com",
+            databaseURL: "https://carbon-footprint-1c2cb.firebaseio.com",
+            projectId: "carbon-footprint-1c2cb",
+            storageBucket: "",
+            messagingSenderId: "770037889701"
+          };
+          firebase.initializeApp(config);
+        </script>
+
+        <script>
+          var logged = document.querySelector('h1')
+          var signOut = document.getElementById('signOut')
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              logged.innerHTML = "Logged in as " + user.email
+            }
+          })
+
+          signOut.onclick = function() {
+            firebase.auth().signOut().then(function() {
+              logged.innerHTML = "Sign out Successful"
+              window.location.replace('login.html')
+            }).catch(function(error) {
+              logged.innerHTML = "Sign out Unsuccessful"
+            })
+          }
+        </script>
+    </body>
+</html>
