@@ -68,7 +68,9 @@
       var emission
 
       var database = firebase.database()
-      var reference = database.ref('/')
+      var userId = firebase.auth().currentUser.uid;
+      var reference = database.ref('/users/' + userId)
+
 
       submit.onclick = function() {
         cartype = document.getElementById('cartype')
