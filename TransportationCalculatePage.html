@@ -86,7 +86,7 @@
 
         var database = firebase.database()
         var user = firebase.auth().currentUser
-        var userRef
+        //var userRef
 
         var database = firebase.database()
         var reference = database.ref('/')
@@ -94,14 +94,13 @@
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             console.log(user.email);
-            userRef = database.ref(user.uid)
+            //userRef = database.ref(user.uid)
           }
         })
-        
-        submit.onclick = function() {
-          reference.set(emission.value)
-        }
 
+        submit.onclick = function() {
+          reference.push(emission.value)
+        }
 
       }
     </script>
