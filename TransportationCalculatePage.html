@@ -6,8 +6,17 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <ul>
+      <div style="float: left; display: table;">
+        <img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
+        <h1 style="color: white; margin: 5px 0 0 10px; display: table-cell; vertical-align: middle;">cImpact</h1>
+      </div>
+      <div style="float: right;">
+        <li><a href="TransportationCalculatePage.html">Transportation</a></li>
+        <li><a id="signOut">Sign Out</a></li>
+      </div>
+    </ul>
     <div class="container">
-
         <h1 id="header" >7.0</h1>
         <label for="hdriven">Hours Driven</label>
         <br>
@@ -57,6 +66,8 @@
 
 
     <script>
+      var logged = document.querySelector('h1')
+
       var hoursdriven = document.getElementById('driven')
       var hoursintrain = document.getElementById('train')
       var hoursflown = document.getElementById('flown')
@@ -93,6 +104,14 @@
 
         reference.set(emission)
       }
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          r.innerHTML = "Logged in as " + user.email
+          window.location.replace('index.html')
+
+        }
+      })
 
     </script>
   </body>
