@@ -8,7 +8,7 @@
   <body>
     <div class="container">
 
-        <h1 id="header" >7.0</h1>
+        <h1 id="header" >8.0</h1>
         <label for="hdriven">Hours Driven</label>
         <br>
         <input type="text" id="driven" name="hoursdriven" placeholder="">
@@ -69,17 +69,7 @@
 
       var database = firebase.database()
       var reference = database.ref('/')
-      var userRef
-
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          console.log(user.email);
-          userRef = database.ref(user.uid)
-          }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-          });
-        }
-      })
+      var userId = firebase.auth().currentUser.uid;
 
       submit.onclick = function() {
         cartype = document.getElementById('cartype')
@@ -101,7 +91,7 @@
         emission = Math.round(emission * 100) / 100
         document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
 
-        reference.set(emission)
+        database.ref(userId).set(emission)
       }
 
     </script>
