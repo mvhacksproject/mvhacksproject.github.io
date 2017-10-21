@@ -68,8 +68,7 @@
       var emission
 
       var database = firebase.database()
-      var userId = firebase.auth().currentUser.uid;
-      var reference = database.ref(userId)
+      var reference = database.ref('/')
 
 
       submit.onclick = function() {
