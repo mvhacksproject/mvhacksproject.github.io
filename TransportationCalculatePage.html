@@ -41,7 +41,20 @@
         <p id = "value"></p>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCPE-4VYjPkJjWnOF7yrXq6lD4Zdaw9XA0",
+        authDomain: "carbon-footprint-1c2cb.firebaseapp.com",
+        databaseURL: "https://carbon-footprint-1c2cb.firebaseio.com",
+        projectId: "carbon-footprint-1c2cb",
+        storageBucket: "",
+        messagingSenderId: "770037889701"
+      };
+      firebase.initializeApp(config);
+    </script>
+
 
     <script>
       var hoursdriven = document.getElementById('driven')
