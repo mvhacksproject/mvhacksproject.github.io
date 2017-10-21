@@ -8,7 +8,7 @@
   <body>
     <div class="container">
 
-        <h1 id="header" >4.0</h1>
+        <h1 id="header" >5.0</h1>
         <label for="hdriven">Hours Driven</label>
         <br>
         <input type="text" id="driven" name="hoursdriven" placeholder="">
@@ -90,7 +90,7 @@
         emission = Math.round(emission * 100) / 100
         document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
 
-        reference.set(emission.value)
+        reference.set(emission)
       }
 
     </script>
