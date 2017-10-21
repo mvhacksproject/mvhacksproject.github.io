@@ -13,8 +13,9 @@
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
           </div>
-
           <div class="container">
+            <p style="color: red; display: none" id="bad-password-text">Bad username/password</p>
+            <br>
             <label><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="uname" id="lEmail" required>
 
@@ -88,9 +89,12 @@
               // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
-              // ...
+              if (errorCode == 'auth/invalid-email') {
+                document.getElementById('bad-password-text').style.display = 'block';
+              } else {
+                document.getElementById('id01').style.display='none';
+              }
             });
-            document.getElementById('id01').style.display='none';
             return false;
           }
 
