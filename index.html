@@ -88,6 +88,7 @@
               var errorMessage = error.message;
               // ...
             });
+            return false;
           }
 
           firebase.auth().onAuthStateChanged(function(user) {
