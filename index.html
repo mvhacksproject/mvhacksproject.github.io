@@ -22,5 +22,14 @@
         <center><img src="http://www.naturaironline.com/contents/media/naturair%20pollution%20factory.gif"></center>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+          $.ajax({
+            type: "GET",
+            url: "https://jsonplaceholder.typicode.com/posts",
+            success: function(data) {
+              console.log(data);
+            }
+          });
+        </script>
     </body>
 </html>
