@@ -171,14 +171,8 @@
 
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-<<<<<<< HEAD
               logged.innerHTML = "Logged in as " + user.email
               //window.location.replace('index.html')
-=======
-              logged.innerHTML = "Logged in as " + user.email;
-              window.location.replace('index.html');
->>>>>>> 7c4a7937c93f59c8c7ff99eb7f045fff925d2963
-
             }
           });
         </script>
