@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Impact</title>
+        <title>cImpact</title>
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
@@ -39,7 +39,7 @@
           signOut.onclick = function() {
             firebase.auth().signOut().then(function() {
               logged.innerHTML = "Sign out Successful"
-              window.location.replace('login.html')
+              window.location.replace('index.html')
             }).catch(function(error) {
               logged.innerHTML = "Sign out Unsuccessful"
             })
