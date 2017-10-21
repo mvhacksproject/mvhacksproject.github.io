@@ -41,7 +41,7 @@
             <li><a href="login.html" onclick="document.getElementById('id01').style.display='block'; return false;">Login</a></li>
             <li><a href="register.html">Register</a></li>
             <li><a href="TransportationCalculatePage.html">Transportation</a></li>
-            <li><a id="signOut">Sign Out</a></li>
+            <li><a id="signOut" style="display: none;">Sign Out</a></li>
           </div>
         </ul>
         <h1 id="header">Hello</h1>
@@ -96,7 +96,8 @@
 
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-              logged.innerHTML = "Logged in as " + user.email
+              logged.innerHTML = "Logged in as " + user.email;
+              document.getElementById('signOut').style.display = 'block';
             }
           })
 
