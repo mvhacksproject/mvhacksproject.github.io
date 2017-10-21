@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Calculate your Carbon Emissions</title>
+  </head>
+  <body>
+    <div class="container">
+
+        <h1 id="header" >Hello</h1>
+        <label for="hdriven">Hours Driven</label>
+        <br>
+        <input type="text" id="driven" name="hoursdriven" placeholder="">
+        <br><br><br>
+        <label for="cartype">Type of Car</label>
+        <br>
+        <select id="cartype" name="cartype">
+          <option value="gasoline">Gas Powered Car</option>
+          <option value="electric">Electric Car</option>
+          <option value="hybrid">Hybrid</option>
+        </select>
+        <br><br><br>
+
+        <label for="htrain">Hours in Train</label>
+        <br>
+        <input type="text" id="train" name="hoursintrain" placeholder="">
+
+        <br><br><br>
+
+        <label for="days">Days Data Accumulated Over</label>
+        <br>
+        <input type="text" id="days" name="days" placeholder="">
+        <br><br><br><br>
+
+        <label for="hflown">Hours Flown</label>
+        <br>
+        <input type="text" id="flown" name="hoursflown" placeholder="">
+        <br><br><br><br>
+        <input id="submit" type="submit" value="Submit">
+        <p id = "value"></p>
+
+
+
+
+
+
+    </div>
+
+    <script>
+      var hoursdriven = document.getElementById('driven')
+      var hoursintrain = document.getElementById('train')
+      var hoursflown = document.getElementById('flown')
+      var days = document.getElementById('days')
+      var cartype = document.getElementById('cartype')
+      //var hoursdriven = Number(hoursdriven)
+      var submit = document.getElementById('submit')
+      var label = document.getElementById('header')
+
+      submit.onclick = function() {
+        cartype = document.getElementById('cartype')
+        hoursdriven = document.getElementById('driven')
+        hoursintrain = document.getElementById('train')
+        hoursflown = document.getElementById('flown')
+        if(cartype.value == "gasoline"){
+          var emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
+        }
+        if(cartype.value == "electric"){
+          var emission = (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
+
+        }
+        if (cartype.value == "hybrid"){
+          var emission = (((((25 * 1.61)*Number(hoursdriven.value))/161)*23.1)/1000) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
+        }
+
+        emission = Math.round(emission * 100) / 100
+        document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
+
+
+
+      }
+    </script>
+  </body>
+</html>
