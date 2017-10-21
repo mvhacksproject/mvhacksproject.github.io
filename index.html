@@ -4,35 +4,65 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" href="img/logo.png">
         <link rel="stylesheet" type="text/css" href="css/login.css">
+        <link rel="stylesheet" type="text/css" href="https://bell.mvhs.club/css/material.css?v=1.1">
     </head>
     <body>
       <!-- this is the login popup -->
       <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php">
+        <form class="modal-content animate material-form" action="/action_page.php">
           <div class="imgcontainer">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
           </div>
           <div class="container">
+            <h1 style="font-size: 60px; margin-bottom: 20px;">Login</h1>
             <p style="color: red; display: none" id="bad-password-text">Bad username/password</p>
             <br>
-            <label><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="uname" id="lEmail" required>
+            <div class="material-input-group">
+              <input type="text" name="uname" id="lEmail" class="material-form-control" required>
+              <label>Email</label>
+            </div>
 
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id="lPassword" required>
+            <div class="material-input-group">
+              <input type="password" rname="psw" class="material-form-control" id="lPassword" required>
+              <label>Password</label>
+            </div>
 
-            <button type="submit" id="lButton">Login</button>
-            <input type="checkbox" checked="checked"> Remember me
+            <button type="submit" id="lButton" class="material-form-button" style="width: 80px;">Login</button>
           </div>
 
           <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+            <button type="button" class="material-form-button" style="background-color: red; width: 100px;" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
           </div>
         </form>
       </div>
       <!-- end of login popup -->
+      <!-- this is the register popup -->
+      <div id="id02" class="modal">
+        <form class="modal-content animate material-form" action="/action_page.php">
+          <div class="imgcontainer">
+          </div>
+          <div class="container">
+            <h1 style="font-size: 60px; margin-bottom: 20px;">Create Account</h1>
+            <p style="color: red; display: none" id="bad-password-text">Bad username/password</p>
+            <br>
+            <div class="material-input-group">
+              <input type="email" name="uname" id="rEmail" class="material-form-control" required>
+              <label>Your Email</label>
+            </div>
+
+            <div class="material-input-group">
+              <input type="password" rname="psw" class="material-form-control" id="rPassword" required>
+              <label>Password</label>
+            </div>
+
+            <button type="submit" id="rButton" class="material-form-button" style="width: 80px;">Login</button>
+          </div>
+
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" class="material-form-button" style="background-color: red; width: 100px;" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <!-- end of register popup -->
         <ul>
           <div style="float: left; display: table;">
             <img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
@@ -40,17 +70,18 @@
           </div>
           <div style="float: right;">
             <li><a id="loginButton" href="login.html" onclick="document.getElementById('id01').style.display='block'; return false;">Login</a></li>
-            <li><a id="registerButton" href="register.html">Register</a></li>
+            <li><a id="registerButton" href="register.html" onclick="document.getElementById('id02').style.display='block'; return false;">Register</a></li>
             <li><a href="TransportationCalculatePage.html">Transportation</a></li>
             <li><a id="signOut" style="display: none;">Sign Out</a></li>
           </div>
         </ul>
-        <h1 id="header">Hello</h1>
+        <h1 id="person-title">Hello</h1>
 
         <center><img src="https://ecochiccayman.files.wordpress.com/2015/02/melting-ice-polar-bear-on-206311.jpg"></center>
         <center><img src="http://www.naturaironline.com/contents/media/naturair%20pollution%20factory.gif"></center>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://bell.mvhs.club/js/material.js?v=1.1"></script>
         <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
         <script>
           // This code is for the login popup
@@ -58,6 +89,13 @@
           window.onclick = function(event) {
               if (event.target == modal) {
                   modal.style.display = "none";
+              }
+          }
+          // This code is for the register popup
+          var modalTwo = document.getElementById('id02');
+          window.onclick = function(event) {
+              if (event.target == modalTwo) {
+                  modalTwo.style.display = "none";
               }
           }
         </script>
@@ -75,7 +113,7 @@
         </script>
 
         <script>
-          var logged = document.querySelector('h1')
+          var logged = document.querySelector('#person-title')
           var signOut = document.getElementById('signOut')
 
           var lEmail = document.getElementById('lEmail')
@@ -94,7 +132,7 @@
               if (errorCode == 'auth/invalid-email') {
                 document.getElementById('bad-password-text').style.display = 'block';
               } else {
-                document.getElementById('id01').style.display='none';
+                document.getElementById('id01').style.display = 'none';
               }
             });
             return false;
@@ -106,6 +144,7 @@
               document.getElementById('signOut').style.display = 'block';
               document.getElementById('loginButton').style.display = 'none';
               document.getElementById('registerButton').style.display = 'none';
+              document.getElementById('id01').style.display = 'none';
             }
           })
 
@@ -117,6 +156,26 @@
               logged.innerHTML = "Sign out Unsuccessful"
             })
           }
+          var rEmail = document.getElementById('rEmail')
+          var rPassword = document.getElementById('rPassword')
+          var rButton = document.getElementById('rButton')
+
+
+          rButton.onclick = function() {
+            firebase.auth().createUserWithEmailAndPassword(rEmail.value, rPassword.value).catch(function(error) {
+              var errorCode = error.code
+              var errorMessage = error.message
+              alert(errorMessage)
+            })
+          }
+
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              logged.innerHTML = "Logged in as " + user.email
+              window.location.replace('index.html')
+
+            }
+          })
         </script>
     </body>
 </html>
