@@ -69,6 +69,17 @@
 
       var database = firebase.database()
       var reference = database.ref('/')
+      var userRef
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log(user.email);
+          userRef = database.ref(user.uid)
+          }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          });
+        }
+      })
 
       submit.onclick = function() {
         cartype = document.getElementById('cartype')
@@ -90,7 +101,7 @@
         emission = Math.round(emission * 100) / 100
         document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
 
-        reference.set(emission)
+        userRef.set(emission)
       }
 
     </script>
