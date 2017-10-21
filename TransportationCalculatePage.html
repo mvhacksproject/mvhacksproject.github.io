@@ -66,6 +66,9 @@
       var submit = document.getElementById('submit')
       var label = document.getElementById('header')
 
+      var database = firebase.database()
+      var reference = database.ref('/')
+
       submit.onclick = function() {
         cartype = document.getElementById('cartype')
         hoursdriven = document.getElementById('driven')
@@ -85,12 +88,7 @@
         emission = Math.round(emission * 100) / 100
         document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
 
-        var userId = firebase.auth().currentUser.uid;
-        function writeUserData(userId, emission) {
-          firebase.database().ref('users/' + userId).set({
-            emission: emission.value
-          });
-        }
+        reference.set("hello")
       }
 
 
