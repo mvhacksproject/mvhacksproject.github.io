@@ -101,7 +101,7 @@
         days = document.getElementById('days')
 
         if(cartype.value == "gasoline"){
-          emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
+          emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))/(Number(days.value))
         }
         if(cartype.value == "electric"){
           emission = (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
