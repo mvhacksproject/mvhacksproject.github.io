@@ -112,57 +112,57 @@
 		};
 		firebase.initializeApp(config);
 
-		var logged = document.querySelector('#person-title')
+		var logged = document.querySelector('#person-title');
 
-		var hoursdriven = document.getElementById('driven')
-		var hoursintrain = document.getElementById('train')
-		var hoursflown = document.getElementById('flown')
-		var days = document.getElementById('days')
-		var cartype = document.getElementById('cartype')
+		var hoursdriven = document.getElementById('driven');
+		var hoursintrain = document.getElementById('train');
+		var hoursflown = document.getElementById('flown');
+		var days = document.getElementById('days');
+		var cartype = document.getElementById('cartype');
 		//var hoursdriven = Number(hoursdriven)
-		var submit = document.getElementById('submit')
-		var label = document.getElementById('header')
-		var emission
+		var submit = document.getElementById('submit');
+		var label = document.getElementById('header');
+		var emission;
 
-		var database = firebase.database()
-		var reference = database.ref('/')
+		var database = firebase.database();
+		var reference = database.ref('/');
 
 
 		submit.onclick = function () {
-			cartype = document.getElementById('cartype')
-			hoursdriven = document.getElementById('driven')
-			hoursintrain = document.getElementById('train')
-			hoursflown = document.getElementById('flown')
-			days = document.getElementById('days')
+			cartype = document.getElementById('cartype');
+			hoursdriven = document.getElementById('driven');
+			hoursintrain = document.getElementById('train');
+			hoursflown = document.getElementById('flown');
+			days = document.getElementById('days');
 
 			if (cartype.value == "gasoline") {
-				emission = (((4.7 / 17600) * 60) * Number(hoursdriven.value)) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
+				emission = (((4.7 / 17600) * 60) * Number(hoursdriven.value)) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))));
 			}
 			if (cartype.value == "electric") {
-				emission = (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
+				emission = (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))));
 
 			}
 			if (cartype.value == "hybrid") {
-				emission = (((((25 * 1.61) * Number(hoursdriven.value)) / 161) * 23.1) / 1000) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
+				emission = (((((25 * 1.61) * Number(hoursdriven.value)) / 161) * 23.1) / 1000) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))));
 			}
 
-			emission = Math.round(emission * 100) / 100
-			document.getElementById('value').innerHTML = "You have generated approximately " + emission + " metric tons of CO2 emissions."
+			emission = Math.round(emission * 100) / 100;
+			document.getElementById('value').innerHTML = "You have generated approximately " + emission + " metric tons of CO2 emissions.";
 
 			if ((emission / Number(days.value)) > 0.1) {
 				if (cartype.value == "gasoline") {
-					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling.";
 				} else {
-					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling.";
 				}
 			} else if (emission / Number(days.value) > 0.06) {
 				if (cartype.value == "gasoline") {
-					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling.";
 				} else {
-					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling.";
 				}
 			} else {
-				document.getElementById('explanation').innerHTML = "You generate an amount of carbon dioxide that is not detrimental to the environment. Congratulations on being eco-friendly and keep up the good work!"
+				document.getElementById('explanation').innerHTML = "You generate an amount of carbon dioxide that is not detrimental to the environment. Congratulations on being eco-friendly and keep up the good work!";
 			}
 
 			document.getElementById('results').style.display = 'block';
@@ -172,7 +172,7 @@
 
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-				logged.innerHTML = "Logged in as " + user.email
+				logged.innerHTML = "Logged in as " + user.email;
 			}
 		});
 
