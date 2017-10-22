@@ -73,7 +73,7 @@
 					<div style="float: right;">
 						<li><a id="loginButton" href="login.html" onclick="document.getElementById('id01').style.display='block'; return false;">Login</a></li>
 						<li><a id="registerButton" href="register.html" onclick="document.getElementById('id02').style.display='block'; return false;">Register</a></li>
-						<li><a id="calculate" href="TransportationCalculatePage.html" style="">Transportation</a></li>
+						<li><a id="calculate" href="TransportationCalculatePage.html" style="display: none;">Transportation</a></li>
 						<li><a id="signOut" style="display: none;">Sign Out</a></li>
 					</div>
 				</ul>
@@ -148,7 +148,7 @@
 					console.log(logged);
 					firebase.auth().onAuthStateChanged(function(user) {
 						if (user) {
-							logged.innerHTML = "Logged in as " + user.email;
+							//logged.innerHTML = "Logged in as " + user.email;
 							document.getElementById('signOut').style.display = 'block';
 							document.getElementById('calculate').style.display = 'block';
 							document.getElementById('loginButton').style.display = 'none';
