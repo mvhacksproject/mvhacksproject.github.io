@@ -6,9 +6,14 @@
 body {
 	font-family: 'Roboto', sans-serif;
 }
-img {
-	width: 85%;
-	height: 85%;
+.full-screen-image {
+	min-height: 100%;
+	min-width: 100%;
+	overflow: hidden;
+	-webkit-filter:brightness(50%);
+	-moz-filter:brightness(50%);
+	filter: url(#brightness); /* required for FF */
+	filter:brightness(50%);
 }
 ul {
 	top: 0;
@@ -38,6 +43,11 @@ li a:hover {
 	background-color: rgb(51, 146, 207);
 }
 
-#person-title {
-	padding-top: 50px;
+.video-text {
+	z-index: 5;
+}
+#video-background video {
+	overflow: hidden;
+	min-width: 100%;
+	min-height: 100%;
 }
