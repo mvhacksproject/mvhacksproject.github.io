@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <title>Calculate - cImpact</title>
+
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/transportation.css">
   </head>
   <body>
     <ul>
       <div style="float: left; display: table;">
         <img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
-        <h1 style="color: white; margin: 5px 0 0 10px; display: table-cell; vertical-align: middle;">cImpact</h1>
+        <h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
       </div>
       <div style="float: right;">
         <li><a href="TransportationCalculatePage.html">Transportation</a></li>
         <li><a id="signOut">Sign Out</a></li>
       </div>
     </ul>
-    <div class="container">
-        <h1 id="header" >7.0</h1>
-        <label for="hdriven">Hours Driven</label>
+    <div style = "margin-left: 20px; font-family:Optima;" class="container">
+        <h1 id="header">Calculate your Carbon Emissions</h1>
         <br>
+        <label style="font-size: 150%;" for="hdriven">Hours Driven</label>
+        <br>
+        <br style="font-size: 50%;">
+
         <input type="text" id="driven" name="hoursdriven" placeholder="">
         <br><br><br>
-        <label for="cartype">Type of Car</label>
+        <label style="font-size: 150%;" for="cartype">Type of Car</label>
         <br>
+        <br style="font-size: 50%;">
         <select id="cartype" name="cartype">
           <option value="gasoline">Gas Powered Car</option>
           <option value="electric">Electric Car</option>
@@ -31,23 +36,29 @@
         </select>
         <br><br><br>
 
-        <label for="htrain">Hours in Train</label>
+        <label style="font-size: 150%;" for="htrain">Hours in Train</label>
+        <br style="font-size: 50%;">
         <br>
         <input type="text" id="train" name="hoursintrain" placeholder="">
 
         <br><br><br>
 
-        <label for="days">Days Data Accumulated Over</label>
+        <label style="font-size: 150%;" for="days">Days Data Accumulated Over</label>
+        <br style="font-size: 50%;">
         <br>
         <input type="text" id="days" name="days" placeholder="">
         <br><br><br><br>
 
-        <label for="hflown">Hours Flown</label>
+        <label style="font-size: 150%;" for="hflown">Hours Flown</label>
+        <br style="font-size: 50%;">
         <br>
         <input type="text" id="flown" name="hoursflown" placeholder="">
         <br><br><br><br>
-        <input id="submit" type="submit" value="Submit">
+        <input id="submit" style = "background-color:#44c767; -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; border:1px solid #18ab29; display:inline-block; cursor:pointer; color:#ffffff; font-family:Courier New; font-size:24px; padding:16px 31px; text-decoration:none; text-shadow:0px 1px 0px #2f6627;" type="submit" value="Submit">
+        <br><br><br>
         <p id = "value"></p>
+        <br>
+        <p id = "explanation"></p>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
@@ -87,6 +98,7 @@
         hoursdriven = document.getElementById('driven')
         hoursintrain = document.getElementById('train')
         hoursflown = document.getElementById('flown')
+        days = document.getElementById('days')
 
         if(cartype.value == "gasoline"){
           emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
@@ -100,7 +112,28 @@
         }
 
         emission = Math.round(emission * 100) / 100
-        document.getElementById('value').innerHTML = "Approximately " + emission + " metric tons of CO2 emissions."
+        document.getElementById('value').innerHTML = "You generate approximately " + emission + " metric tons of CO2 emissions."
+
+        if((emission/Number(days.value)) > 0.1){
+          if(cartype.value == "gasoline"){
+              document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+          }
+          else{
+              document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+          }
+        }
+        else if(emission/Number(days.value) > 0.06){
+          if(cartype.value == "gasoline"){
+              document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+          }
+          else{
+            document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+        }
+        }
+        else{
+          document.getElementById('explanation').innerHTML = "You generate an amount of carbon dioxide that is not detrimental to the environment. Congratulations on being eco-friendly and keep up the good work!"
+        }
+
 
         reference.set(emission)
       }
