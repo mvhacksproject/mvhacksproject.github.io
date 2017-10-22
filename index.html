@@ -146,7 +146,8 @@
               document.getElementById('loginButton').style.display = 'none';
               document.getElementById('registerButton').style.display = 'none';
               document.getElementById('id01').style.display = 'none';
-          })
+            }
+          });
 
           signOut.onclick = function() {
             firebase.auth().signOut().then(function() {
