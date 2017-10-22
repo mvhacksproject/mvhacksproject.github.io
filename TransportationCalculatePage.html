@@ -101,7 +101,7 @@
         days = document.getElementById('days')
 
         if(cartype.value == "gasoline"){
-          emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))/(Number(days.value))
+          emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
         }
         if(cartype.value == "electric"){
           emission = (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
@@ -112,7 +112,7 @@
         }
 
         emission = Math.round(emission * 100) / 100
-        document.getElementById('value').innerHTML = "You generate approximately " + emission + " metric tons of CO2 emissions."
+        document.getElementById('value').innerHTML = "You have generated approximately " + emission + " metric tons of CO2 emissions."
 
         if((emission/Number(days.value)) > 0.1){
           if(cartype.value == "gasoline"){
