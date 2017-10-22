@@ -54,7 +54,7 @@
 							<label>Password</label>
 						</div>
 
-						<button type="submit" id="rButton" class="material-form-button" style="width: 80px;">Login</button>
+						<button type="submit" id="rButton" class="material-form-button" style="width: 200px;">Create Account</button>
 					</div>
 
 					<div class="container" style="background-color:#f1f1f1">
@@ -67,7 +67,7 @@
 					<a href="/">
 						<div style="float: left; display: table;">
 							<img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
-							<h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
+							<h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle; font-family: courier;">cImpact</h1>
 						</div>
 					</a>
 					<div style="float: right;">
@@ -174,9 +174,9 @@
 						firebase.auth().createUserWithEmailAndPassword(rEmail.value, rPassword.value).catch(function(error) {
 							var errorCode = error.code;
 							var errorMessage = error.message;
-							alert(errorMessage);
-							return false;
+							//alert(errorMessage);
 						});
+						return false;
 					}
 				</script>
 		</body>
