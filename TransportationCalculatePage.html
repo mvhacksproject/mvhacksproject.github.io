@@ -47,10 +47,12 @@
 	</head>
 	<body>
 	<ul>
-		<div style="float: left; display: table;">
-		<img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
-		<h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
-		</div>
+		<a href="/">
+			<div style="float: left; display: table;">
+				<img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
+				<h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
+			</div>
+		</a>
 		<div style="float: right;">
 		<li><a href="TransportationCalculatePage.html">Transportation</a></li>
 		<li><a id="signOut">Sign Out</a></li>
@@ -80,12 +82,12 @@
 				<label>Hours In A Train</label>
 			</div>
 			<div class="material-input-group">
-				<input id="days" name="days" name="hoursintrain" class="material-form-control"/>
-				<label>Days Data Accumulated Over</label>
-			</div>
-			<div class="material-input-group">
 				<input type="text" id="flown" name="hoursflown" class="material-form-control">
 				<label>Hours Flown</label>
+			</div>
+			<div class="material-input-group">
+				<input id="days" name="days" name="hoursintrain" class="material-form-control"/>
+				<label>Days Data Accumulated Over</label>
 			</div>
 			<button id="submit" class="material-form-button">Submit</button>
 		</form>
