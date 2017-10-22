@@ -148,8 +148,13 @@
               document.getElementById('loginButton').style.display = 'none';
               document.getElementById('registerButton').style.display = 'none';
               document.getElementById('id01').style.display = 'none';
-              total.innerHTML = firebase.database().ref('/')
+              reference.on("child_added", function(snapshot) {
+                console.log(snapshot.val());
+                var item = document.createElement("li")
+                item.innerText = snapshot.val()
             }
+
+            total.appendChild(item)
           })
 
           signOut.onclick = function() {
