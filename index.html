@@ -76,6 +76,7 @@
           </div>
         </ul>
         <h1 id="person-title">Hello</h1>
+        <h2 id="totalEmissions">Total Emissions: 0</h2>
 
         <center><img src="https://ecochiccayman.files.wordpress.com/2015/02/melting-ice-polar-bear-on-206311.jpg"></center>
         <center><img src="http://www.naturaironline.com/contents/media/naturair%20pollution%20factory.gif"></center>
@@ -115,6 +116,7 @@
         <script>
           var logged = document.querySelector('#person-title');
           var signOut = document.getElementById('signOut');
+          var total = document.getElementById('totalEmissions')
 
           var lEmail = document.getElementById('lEmail');
           var lPassword = document.getElementById('lPassword');
@@ -146,6 +148,7 @@
               document.getElementById('loginButton').style.display = 'none';
               document.getElementById('registerButton').style.display = 'none';
               document.getElementById('id01').style.display = 'none';
+              total.innerHTML = firebase.database().ref('/')
             }
           })
 
