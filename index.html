@@ -83,14 +83,15 @@
 					<img style="display:block;" class="full-screen-image" src="http://www.naturaironline.com/contents/media/naturair%20pollution%20factory.gif">
 				</div> -->
 
-				<div id="video-background">
-					<video autoplay loop>
+				<!-- <div id="video-background" style="margin-top: 46px;">
+					<video autoplay loop muted>
 						<source src="videos/video.mp4" type="">
+							<h1 style="color: blue;">Text Here</h1>
 					</video>
 					<div class="video-text">
-						
+						<h1>Text Here</h1>
 					</div>
-				</div>
+				</div> -->
 
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				<script src="https://bell.mvhs.club/js/material.js?v=1.1"></script>
@@ -120,9 +121,6 @@
 						messagingSenderId: "770037889701"
 					};
 					firebase.initializeApp(config);
-				</script>
-
-				<script>
 					var logged = document.querySelector('#person-title');
 					var signOut = document.getElementById('signOut');
 
@@ -147,7 +145,7 @@
 						});
 						return false;
 					}
-
+					console.log(logged);
 					firebase.auth().onAuthStateChanged(function(user) {
 						if (user) {
 							logged.innerHTML = "Logged in as " + user.email;
