@@ -143,7 +143,15 @@
           logged.innerHTML = "Logged in as " + user.email
         }
       })
-
+      
+      signOut.onclick = function() {
+        firebase.auth().signOut().then(function() {
+          logged.innerHTML = "Sign out Successful";
+          window.location.replace('index.html');
+        }).catch(function(error) {
+          logged.innerHTML = "Sign out Unsuccessful";
+        })
+      }
     </script>
   </body>
 </html>
