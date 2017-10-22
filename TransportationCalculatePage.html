@@ -1,156 +1,189 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Calculate - cImpact</title>
+	<head>
+	<title>Calculate - cImpact</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://bell.mvhs.club/css/material.css?v=1.1">
+	<style type="text/css">
+		.material-input-group {
+			margin-bottom: 40px;
+		}
+		label.custom-select {
+			position: relative;
+			display: inline-block;
+		}
+		.custom-select select {
+			display: inline-block;
+			padding: 4px 3px 3px 5px;
+			margin: 0;
+			font: inherit;
+			outline:none;
+			line-height: 1.2;
+			border:0;
+			width: 125px;
+		}
 
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <ul>
-      <div style="float: left; display: table;">
-        <img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
-        <h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
-      </div>
-      <div style="float: right;">
-        <li><a href="TransportationCalculatePage.html">Transportation</a></li>
-        <li><a id="signOut">Sign Out</a></li>
-      </div>
-    </ul>
-    <div style = "margin-left: 20px; font-family:Optima;" class="container">
-        <h1 id="header">Calculate your Carbon Emissions</h1>
-        <br>
-        <label style="font-size: 150%;" for="hdriven">Hours Driven</label>
-        <br>
-        <br style="font-size: 50%;">
-
-        <input type="text" id="driven" name="hoursdriven" placeholder="">
-        <br><br><br>
-        <label style="font-size: 150%;" for="cartype">Type of Car</label>
-        <br>
-        <br style="font-size: 50%;">
-        <select id="cartype" name="cartype">
-          <option value="gasoline">Gas Powered Car</option>
-          <option value="electric">Electric Car</option>
-          <option value="hybrid">Hybrid</option>
-        </select>
-        <br><br><br>
-
-        <label style="font-size: 150%;" for="htrain">Hours in Train</label>
-        <br style="font-size: 50%;">
-        <br>
-        <input type="text" id="train" name="hoursintrain" placeholder="">
-
-        <br><br><br>
-
-        <label style="font-size: 150%;" for="days">Days Data Accumulated Over</label>
-        <br style="font-size: 50%;">
-        <br>
-        <input type="text" id="days" name="days" placeholder="">
-        <br><br><br><br>
-
-        <label style="font-size: 150%;" for="hflown">Hours Flown</label>
-        <br style="font-size: 50%;">
-        <br>
-        <input type="text" id="flown" name="hoursflown" placeholder="">
-        <br><br><br><br>
-        <input id="submit" style = "background-color:#44c767; -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; border:1px solid #18ab29; display:inline-block; cursor:pointer; color:#ffffff; font-family:Courier New; font-size:24px; padding:16px 31px; text-decoration:none; text-shadow:0px 1px 0px #2f6627;" type="submit" value="Submit">
-        <br><br><br>
-        <p id = "value"></p>
-        <br>
-        <p id = "explanation"></p>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-    <script>
-    // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyCPE-4VYjPkJjWnOF7yrXq6lD4Zdaw9XA0",
-        authDomain: "carbon-footprint-1c2cb.firebaseapp.com",
-        databaseURL: "https://carbon-footprint-1c2cb.firebaseio.com",
-        projectId: "carbon-footprint-1c2cb",
-        storageBucket: "",
-        messagingSenderId: "770037889701"
-      };
-      firebase.initializeApp(config);
-    </script>
+		.custom-select:after {
+			content: "▼";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			font-size: 60%;
+			line-height: 30px;
+			padding: 0 7px;
+			pointer-events: none;
+		}
+		.material-form-control {
+			z-index: 4;
+		}
+		#results {
+			border-top: 1px solid black;
+			margin-top: 20px;
+			padding-top: 20px;
+			display: none;
+		}
+	</style>
+	</head>
+	<body>
+	<ul>
+		<div style="float: left; display: table;">
+		<img style="height: 40px; display: inline; width: 40px; display: table-cell; margin-right: 15px;" src="img/logo.png">
+		<h1 style="color: white; margin: 10px 0 0 20px; display: table-cell; vertical-align: middle;">cImpact</h1>
+		</div>
+		<div style="float: right;">
+		<li><a href="TransportationCalculatePage.html">Transportation</a></li>
+		<li><a id="signOut">Sign Out</a></li>
+		</div>
+	</ul>
 
 
-    <script>
-      var logged = document.querySelector('h1')
 
-      var hoursdriven = document.getElementById('driven')
-      var hoursintrain = document.getElementById('train')
-      var hoursflown = document.getElementById('flown')
-      var days = document.getElementById('days')
-      var cartype = document.getElementById('cartype')
-      //var hoursdriven = Number(hoursdriven)
-      var submit = document.getElementById('submit')
-      var label = document.getElementById('header')
-      var emission
+	<div style="width: 480px; background-color: #f2f2f2; border-radius: 20px; margin: 0 auto; margin-top: 100px; padding: 40px;">
+		<h1 style="margin-bottom: 40px;">Update Your Carbon Emissions</h1>
+		<form class="material-form">
+			<div class="material-input-group">
+				<input type="text" name="hoursdriven" id="driven" class="material-form-control"/>
+				<label>Hours Driven</label>
+			</div>
+			<div class="material-input-group">
+				<label class="custom-select" >
+					<select id="cartype" name="cartype" style="box-sizing: content-box; display: inline-block; padding: 5px 10px; margin: 0; outline: none; line-height: 1.2;  border:0; -webkit-appearance: none; -moz-appearance: none; appearance: none; border-radius: 0px;">
+						<option value="gasoline">Gas Powered Car</option>
+						<option value="electric">Electric Car</option>
+						<option value="hybrid">Hybrid</option>
+					</select>
+				</label>
+			</div>
+			<div class="material-input-group">
+				<input type="text" id="train" name="hoursintrain" class="material-form-control"/>
+				<label>Hours In A Train</label>
+			</div>
+			<div class="material-input-group">
+				<input id="days" name="days" name="hoursintrain" class="material-form-control"/>
+				<label>Days Data Accumulated Over</label>
+			</div>
+			<div class="material-input-group">
+				<input type="text" id="flown" name="hoursflown" class="material-form-control">
+				<label>Hours Flown</label>
+			</div>
+			<button id="submit" class="material-form-button">Submit</button>
+		</form>
+		<div id="results">
+			<h2 style="margin-bottom: 10px;">Results</h2>
+			<p id="value"></p>
+			<br>
+			<p id="explanation"></p>
+		</div>
+	</div>
 
-      var database = firebase.database()
-      var reference = database.ref('/')
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+	<script src="https://bell.mvhs.club/js/material.js?v=1.1"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCPE-4VYjPkJjWnOF7yrXq6lD4Zdaw9XA0",
+			authDomain: "carbon-footprint-1c2cb.firebaseapp.com",
+			databaseURL: "https://carbon-footprint-1c2cb.firebaseio.com",
+			projectId: "carbon-footprint-1c2cb",
+			storageBucket: "",
+			messagingSenderId: "770037889701"
+		};
+		firebase.initializeApp(config);
+
+		var logged = document.querySelector('#person-title')
+
+		var hoursdriven = document.getElementById('driven')
+		var hoursintrain = document.getElementById('train')
+		var hoursflown = document.getElementById('flown')
+		var days = document.getElementById('days')
+		var cartype = document.getElementById('cartype')
+		//var hoursdriven = Number(hoursdriven)
+		var submit = document.getElementById('submit')
+		var label = document.getElementById('header')
+		var emission
+
+		var database = firebase.database()
+		var reference = database.ref('/')
 
 
-      submit.onclick = function() {
-        cartype = document.getElementById('cartype')
-        hoursdriven = document.getElementById('driven')
-        hoursintrain = document.getElementById('train')
-        hoursflown = document.getElementById('flown')
-        days = document.getElementById('days')
+		submit.onclick = function () {
+			cartype = document.getElementById('cartype')
+			hoursdriven = document.getElementById('driven')
+			hoursintrain = document.getElementById('train')
+			hoursflown = document.getElementById('flown')
+			days = document.getElementById('days')
 
-        if(cartype.value == "gasoline"){
-          emission = (((4.7/17600)*60)*Number(hoursdriven.value)) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
-        }
-        if(cartype.value == "electric"){
-          emission = (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
+			if (cartype.value == "gasoline") {
+				emission = (((4.7 / 17600) * 60) * Number(hoursdriven.value)) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
+			}
+			if (cartype.value == "electric") {
+				emission = (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
 
-        }
-        if (cartype.value == "hybrid"){
-          emission = (((((25 * 1.61)*Number(hoursdriven.value))/161)*23.1)/1000) + (Number(hoursflown.value)*115/1000) + ((0.065/1000)*(59*1.61*(Number(hoursintrain.value))))
-        }
+			}
+			if (cartype.value == "hybrid") {
+				emission = (((((25 * 1.61) * Number(hoursdriven.value)) / 161) * 23.1) / 1000) + (Number(hoursflown.value) * 115 / 1000) + ((0.065 / 1000) * (59 * 1.61 * (Number(hoursintrain.value))))
+			}
 
-        emission = Math.round(emission * 100) / 100
-        document.getElementById('value').innerHTML = "You have generated approximately " + emission + " metric tons of CO2 emissions."
+			emission = Math.round(emission * 100) / 100
+			document.getElementById('value').innerHTML = "You have generated approximately " + emission + " metric tons of CO2 emissions."
 
-        if((emission/Number(days.value)) > 0.1){
-          if(cartype.value == "gasoline"){
-              document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
-          }
-          else{
-              document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
-          }
-        }
-        else if(emission/Number(days.value) > 0.06){
-          if(cartype.value == "gasoline"){
-              document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
-          }
-          else{
-            document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
-        }
-        }
-        else{
-          document.getElementById('explanation').innerHTML = "You generate an amount of carbon dioxide that is not detrimental to the environment. Congratulations on being eco-friendly and keep up the good work!"
-        }
+			if ((emission / Number(days.value)) > 0.1) {
+				if (cartype.value == "gasoline") {
+					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+				} else {
+					document.getElementById('explanation').innerHTML = "You generate an unhealthy amount of carbon dioxide for the environment. You can cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+				}
+			} else if (emission / Number(days.value) > 0.06) {
+				if (cartype.value == "gasoline") {
+					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by purchasing an electric car and by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+				} else {
+					document.getElementById('explanation').innerHTML = "You generate a reasonable amount carbon dioxide for the environment. However, it is still beneficial to cut down on your emissions by trying out different, more eco-friendly, forms of transportation such as walking, biking, or carpooling."
+				}
+			} else {
+				document.getElementById('explanation').innerHTML = "You generate an amount of carbon dioxide that is not detrimental to the environment. Congratulations on being eco-friendly and keep up the good work!"
+			}
 
+			document.getElementById('results').style.display = 'block';
+			reference.set(emission);
+			return false;
+		}
 
-        reference.set(emission)
-      }
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				logged.innerHTML = "Logged in as " + user.email
+			}
+		});
 
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          logged.innerHTML = "Logged in as " + user.email
-        }
-      })
-      
-      signOut.onclick = function() {
-        firebase.auth().signOut().then(function() {
-          logged.innerHTML = "Sign out Successful";
-          window.location.replace('index.html');
-        }).catch(function(error) {
-          logged.innerHTML = "Sign out Unsuccessful";
-        })
-      }
-    </script>
-  </body>
+		signOut.onclick = function () {
+				firebase.auth().signOut().then(function () {
+					logged.innerHTML = "Sign out Successful";
+					window.location.replace('index.html');
+				}).catch(function (error) {
+					logged.innerHTML = "Sign out Unsuccessful";
+				});
+		}
+	</script>
+	</body>
 </html>
